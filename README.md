@@ -1,3 +1,3 @@
-# Welcome to your Lovable project
+# GrandClean Next.js Project
 
-TODO: Document your project here
+Web application for GrandClean.
