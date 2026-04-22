@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import {
   ArrowRight,
@@ -183,12 +184,14 @@ export default function HomePageClient({ lang }: { lang: Locale }) {
             transition={{ delay: 0.3, duration: 0.8 }}
             className="relative hidden lg:block"
           >
-            <div className="relative rounded-2xl overflow-hidden shadow-elevated">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/images/hero-interior.jpg"
+            <div className="relative rounded-2xl overflow-hidden shadow-elevated w-full h-[520px]">
+              <Image
+                src="/images/hero-interior.webp"
                 alt="Чистый интерьер"
-                className="w-full h-[520px] object-cover object-top"
+                fill
+                sizes="(min-width: 1024px) 50vw, 100vw"
+                priority
+                className="object-cover object-top"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
             </div>
@@ -280,10 +283,11 @@ export default function HomePageClient({ lang }: { lang: Locale }) {
                 transition={{ duration: 0.4 }}
                 className="rounded-2xl overflow-hidden h-[500px] lg:h-full lg:min-h-[400px]"
               >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+                <Image
                   src={servicesData[activeService].img}
                   alt={servicesData[activeService].translations[lang]?.title}
+                  fill
+                  sizes="(min-width: 1024px) 60vw, 100vw"
                   className="w-full h-full object-cover object-top"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent hidden" />
@@ -317,9 +321,11 @@ export default function HomePageClient({ lang }: { lang: Locale }) {
                     href={`/${lang}/services/${s.id}/`}
                     className="block relative h-[350px]"
                   >
-                    <img
+                    <Image
                       src={s.img}
                       alt={tr.title}
+                      fill
+                      sizes="100vw"
                       className="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />

@@ -32,7 +32,7 @@ export interface ServiceTranslation {
 export const servicesData: Service[] = [
   {
     id: "professionalnaya-uborka",
-    img: "/images/service-apartment.png",
+    img: "/images/service-apartment.webp",
     translations: {
       ru: {
         title: "Профессиональная уборка",
@@ -120,7 +120,7 @@ export const servicesData: Service[] = [
   },
   {
     id: "stirka-kovrov",
-    img: "/images/service-carpet.png",
+    img: "/images/service-carpet.webp",
     translations: {
       ru: {
         title: "Стирка ковров",
@@ -205,7 +205,7 @@ export const servicesData: Service[] = [
   },
   {
     id: "himchistka-mebeli",
-    img: "/images/service-sofa.png",
+    img: "/images/service-sofa.webp",
     translations: {
       ru: {
         title: "Химчистка мебели",
@@ -290,7 +290,7 @@ export const servicesData: Service[] = [
   },
   {
     id: "moyka-okon",
-    img: "/images/moyka-okon.png",
+    img: "/images/moyka-okon.webp",
     translations: {
       ru: {
         title: "Мойка окон",
@@ -377,7 +377,7 @@ export const servicesData: Service[] = [
   },
   {
     id: "mytyo-fasadov",
-    img: "/images/klining-fasadov.png",
+    img: "/images/klining-fasadov.webp",
     translations: {
       ru: {
         title: "Мытьё фасадов",
@@ -464,7 +464,7 @@ export const servicesData: Service[] = [
   },
   {
     id: "chistka-bruschatki",
-    img: "/images/chistka-bruschatki.png",
+    img: "/images/chistka-bruschatki.webp",
     translations: {
       ru: {
         title: "Чистка брусчатки",
@@ -552,7 +552,7 @@ export const servicesData: Service[] = [
   },
   {
     id: "dezinfekciya",
-    img: "/images/dezinfekciya.png",
+    img: "/images/dezinfekciya.webp",
     translations: {
       ru: {
         title: "Дезинфекция",

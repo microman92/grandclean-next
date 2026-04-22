@@ -1,5 +1,6 @@
 "use client";
 
+import { use } from "react";
 import type { Locale } from "@/lib/i18n";
 import { getDictionary } from "@/lib/i18n";
 import Link from "next/link";
@@ -38,8 +39,12 @@ const faq = [
   },
 ];
 
-export default function PricingPage({ params }: { params: { lang: Locale } }) {
-  const lang = params.lang;
+export default function PricingPage({
+  params,
+}: {
+  params: Promise<{ lang: Locale }>;
+}) {
+  const { lang } = use(params);
   const t = getDictionary(lang);
 
   return (
@@ -48,7 +53,7 @@ export default function PricingPage({ params }: { params: { lang: Locale } }) {
       <section className="relative overflow-hidden bg-hero-gradient section-padding min-h-[40vh] flex items-center pt-32">
         <div className="absolute inset-0 z-0">
           <Image
-            src="/images/hero-interior.jpg"
+            src="/images/hero-interior.webp"
             alt="Цены на услуги"
             fill
             className="object-cover opacity-10"

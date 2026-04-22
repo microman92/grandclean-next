@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import {
   ReactCompareSlider,
   ReactCompareSliderImage,
@@ -66,6 +67,12 @@ const CustomHandle = () => (
 );
 
 export default function BeforeAfter() {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   return (
     <section className="section-padding bg-ice">
       <div className="container-wide">
@@ -85,32 +92,42 @@ export default function BeforeAfter() {
             border: "1px solid rgba(255,255,255,0.1)",
           }}
         >
-          <ReactCompareSlider
-            handle={<CustomHandle />}
-            itemOne={
-              <ReactCompareSliderImage
-                src="/images/before.png"
-                alt="До уборки"
-                style={{
-                  objectFit: "cover",
-                  transform: "scale(1.22)",
-                  transformOrigin: "center center",
-                }}
-              />
-            }
-            itemTwo={
-              <ReactCompareSliderImage
-                src="/images/after.png"
-                alt="После уборки"
-                style={{
-                  objectFit: "cover",
-                  transform: "scale(1.22)",
-                  transformOrigin: "center center",
-                }}
-              />
-            }
-            style={{ height: "400px", width: "100%" }}
-          />
+          {mounted ? (
+            <ReactCompareSlider
+              handle={<CustomHandle />}
+              itemOne={
+                <ReactCompareSliderImage
+                  src="/images/before.webp"
+                  alt="До уборки"
+                  style={{
+                    objectFit: "cover",
+                    transform: "scale(1.22)",
+                    transformOrigin: "center center",
+                  }}
+                />
+              }
+              itemTwo={
+                <ReactCompareSliderImage
+                  src="/images/after.webp"
+                  alt="После уборки"
+                  style={{
+                    objectFit: "cover",
+                    transform: "scale(1.22)",
+                    transformOrigin: "center center",
+                  }}
+                />
+              }
+              style={{ height: "400px", width: "100%" }}
+            />
+          ) : (
+            <div
+              style={{
+                height: "400px",
+                width: "100%",
+                backgroundColor: "var(--background)",
+              }}
+            />
+          )}
         </div>
       </div>
     </section>

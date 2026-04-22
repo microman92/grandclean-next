@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import {
   Phone,
   Mail,
@@ -46,10 +47,11 @@ export default function Footer({ lang, t }: FooterProps) {
               href={`/${lang}/`}
               className="flex items-center gap-3 mb-6 w-fit group"
             >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              <Image
                 src="/images/logo.svg"
                 alt="GrandClean Logo"
+                width={60}
+                height={60}
                 className="w-[60px] h-[60px] object-contain group-hover:scale-105 transition-transform"
               />
               <span className="font-display font-bold text-xl tracking-wide text-white">

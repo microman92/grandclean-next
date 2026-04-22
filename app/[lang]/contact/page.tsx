@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { use, useState } from "react";
 import type { Locale } from "@/lib/i18n";
 import { getDictionary } from "@/lib/i18n";
 import { Phone, Mail, MapPin, Clock, Send } from "lucide-react";
@@ -25,8 +25,12 @@ const contactInfo = [
   { icon: Clock, label: "Режим работы", value: "Пн-Вс: 08:00 — 22:00" },
 ];
 
-export default function ContactPage({ params }: { params: { lang: Locale } }) {
-  const lang = params.lang;
+export default function ContactPage({
+  params,
+}: {
+  params: Promise<{ lang: Locale }>;
+}) {
+  const { lang } = use(params);
   const t = getDictionary(lang);
   const [form, setForm] = useState({
     name: "",
@@ -80,7 +84,7 @@ export default function ContactPage({ params }: { params: { lang: Locale } }) {
       <section className="relative overflow-hidden bg-hero-gradient section-padding min-h-[40vh] flex items-center pt-32">
         <div className="absolute inset-0 z-0">
           <Image
-            src="/images/hero-interior.jpg"
+            src="/images/hero-interior.webp"
             alt="Контакты"
             fill
             className="object-cover opacity-10"

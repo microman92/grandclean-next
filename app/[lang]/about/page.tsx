@@ -1,5 +1,6 @@
 "use client";
 
+import { use } from "react";
 import type { Locale } from "@/lib/i18n";
 import { getDictionary } from "@/lib/i18n";
 import Image from "next/image";
@@ -56,8 +57,12 @@ const values = [
   { icon: Award, title: "Качество", desc: "Высокие стандарты на каждом этапе" },
 ];
 
-export default function AboutPage({ params }: { params: { lang: Locale } }) {
-  const lang = params.lang;
+export default function AboutPage({
+  params,
+}: {
+  params: Promise<{ lang: Locale }>;
+}) {
+  const { lang } = use(params);
   const t = getDictionary(lang);
 
   return (
@@ -66,7 +71,7 @@ export default function AboutPage({ params }: { params: { lang: Locale } }) {
       <section className="relative overflow-hidden bg-hero-gradient section-padding min-h-[40vh] flex items-center pt-32">
         <div className="absolute inset-0 z-0">
           <Image
-            src="/images/hero-interior.jpg"
+            src="/images/hero-interior.webp"
             alt="О компании"
             fill
             className="object-cover opacity-10"
@@ -96,7 +101,7 @@ export default function AboutPage({ params }: { params: { lang: Locale } }) {
           <AnimatedSection>
             <div className="relative">
               <Image
-                src="/images/team.jpg"
+                src="/images/team.webp"
                 alt="Наша команда"
                 width={800}
                 height={600}
@@ -247,7 +252,7 @@ export default function AboutPage({ params }: { params: { lang: Locale } }) {
             />
             <div className="rounded-2xl overflow-hidden max-w-4xl mx-auto h-[300px] md:h-[400px] relative">
               <Image
-                src="/images/hero-interior.jpg"
+                src="/images/hero-interior.webp"
                 alt="Наш офис"
                 fill
                 className="object-cover"

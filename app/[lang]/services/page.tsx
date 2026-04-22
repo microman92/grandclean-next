@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { use, useState } from "react";
 import type { Locale } from "@/lib/i18n";
 import { getDictionary } from "@/lib/i18n";
 import { servicesData, getServiceTranslation } from "@/data/services";
@@ -12,8 +12,12 @@ import AnimatedSection from "@/app/components/AnimatedSection";
 
 const categories = ["Все", "Помещения", "Специальные", "Фасады и экстерьер"];
 
-export default function ServicesPage({ params }: { params: { lang: Locale } }) {
-  const lang = params.lang;
+export default function ServicesPage({
+  params,
+}: {
+  params: Promise<{ lang: Locale }>;
+}) {
+  const { lang } = use(params);
   const t = getDictionary(lang);
   const [active, setActive] = useState("Все");
 
@@ -31,7 +35,7 @@ export default function ServicesPage({ params }: { params: { lang: Locale } }) {
       <section className="relative overflow-hidden bg-hero-gradient section-padding min-h-[40vh] flex items-center pt-32">
         <div className="absolute inset-0 z-0">
           <Image
-            src="/images/hero-interior.jpg"
+            src="/images/hero-interior.webp"
             alt={t.services.pageTitle}
             fill
             className="object-cover opacity-10"

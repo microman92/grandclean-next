@@ -14,33 +14,35 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: {
-  params: { lang: Locale };
+  params: Promise<{ lang: Locale }>;
 }): Promise<Metadata> {
-  const t = getDictionary(params.lang);
-  const isRu = params.lang === "ru";
+  const { lang } = await params;
+  const t = getDictionary(lang);
+  const isRu = lang === "ru";
   return {
+    metadataBase: new URL("https://grandclean.uz"),
     title: {
       default: t.meta.defaultTitle,
-      template: `%s | GrandClean ${isRu ? "Ташкент" : "Toshkent"}`,
+      template: `%s | GrandClean - Клининг в Ташкенте`,
     },
     description: t.meta.defaultDescription,
     keywords: t.meta.defaultKeywords,
     alternates: {
-      canonical: `https://grandclean.uz/${params.lang}/`,
+      canonical: `https://grandclean.uz/${lang}/`,
       languages: {
-        "ru-UZ": "https://grandclean.uz/ru/",
-        "uz-UZ": "https://grandclean.uz/uz/",
+        ru: `https://grandclean.uz/ru/`,
+        uz: `https://grandclean.uz/uz/`,
       },
     },
     openGraph: {
       type: "website",
-      url: `https://grandclean.uz/${params.lang}/`,
+      url: `https://grandclean.uz/${lang}/`,
       siteName: "GrandClean",
       title: t.meta.defaultTitle,
       description: t.meta.defaultDescription,
       images: [
         {
-          url: "https://grandclean.uz/images/og-image.jpg",
+          url: "https://grandclean.uz/images/og-image.webp",
           width: 1200,
           height: 630,
           alt: "GrandClean — профессиональный клининг в Ташкенте",
@@ -71,7 +73,7 @@ const localBusinessSchema = {
   address: {
     "@type": "PostalAddress",
     streetAddress: "ул. Жураева 48, Babur Street",
-    addressLocality: "Ташкент",
+    addressLocality: "Tashkent",
     addressRegion: "Ташкент",
     addressCountry: "UZ",
     postalCode: "100000",
@@ -97,18 +99,23 @@ const localBusinessSchema = {
       closes: "22:00",
     },
   ],
-  priceRange: "$$",
+  priceRange: "UZS",
   currenciesAccepted: "UZS",
   paymentAccepted: "Cash, Credit Card, Payme, Click",
-  areaServed: {
-    "@type": "GeoCircle",
-    geoMidpoint: {
-      "@type": "GeoCoordinates",
-      latitude: 41.2995,
-      longitude: 69.2401,
-    },
-    geoRadius: "50000",
-  },
+  areaServed: [
+    { "@type": "City", name: "Chilanzar" },
+    { "@type": "City", name: "Mirabad" },
+    { "@type": "City", name: "Yunusabad" },
+    { "@type": "City", name: "Mirzo Ulugbek" },
+    { "@type": "City", name: "Sergeli" },
+    { "@type": "City", name: "Yashnabad" },
+    { "@type": "City", name: "Uchtepa" },
+    { "@type": "City", name: "Almazar" },
+    { "@type": "City", name: "Bektemir" },
+    { "@type": "City", name: "Shaykhantahur" },
+    { "@type": "City", name: "Yakkasaray" },
+    { "@type": "City", name: "Yangihayot" },
+  ],
   sameAs: [
     "https://www.instagram.com/grandclean.uz",
     "https://t.me/grandclean_uz",
@@ -122,36 +129,34 @@ const localBusinessSchema = {
   },
 };
 
-export default function LangLayout({
+export default async function LangLayout({
   children,
   params,
 }: {
   children: React.ReactNode;
-  params: { lang: Locale };
+  params: Promise<{ lang: Locale }>;
 }) {
-  if (!locales.includes(params.lang)) {
+  const { lang } = await params;
+
+  if (!locales.includes(lang)) {
     notFound();
   }
 
-  const t = getDictionary(params.lang);
+  const t = getDictionary(lang);
 
   return (
-    <html lang={params.lang} dir="ltr">
-      <head>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(localBusinessSchema),
-          }}
-        />
-      </head>
-      <body className="bg-background text-foreground">
-        <Navigation lang={params.lang} t={t} />
-        <main id="main-content">{children}</main>
-        <Footer lang={params.lang} t={t} />
-        <FloatingContacts />
-        <Toaster position="top-center" richColors />
-      </body>
-    </html>
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(localBusinessSchema),
+        }}
+      />
+      <Navigation lang={lang} t={t} />
+      <main id="main-content">{children}</main>
+      <Footer lang={lang} t={t} />
+      <FloatingContacts />
+      <Toaster position="top-center" richColors />
+    </>
   );
 }

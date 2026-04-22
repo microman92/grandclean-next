@@ -10,15 +10,16 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: {
-  params: { lang: Locale };
+  params: Promise<{ lang: Locale }>;
 }): Promise<Metadata> {
-  const t = getDictionary(params.lang);
+  const { lang } = await params;
+  const t = getDictionary(lang);
   return {
     title: t.meta.defaultTitle,
     description: t.meta.defaultDescription,
     keywords: t.meta.defaultKeywords,
     alternates: {
-      canonical: `https://grandclean.uz/${params.lang}/`,
+      canonical: `https://grandclean.uz/${lang}/`,
       languages: {
         "ru-UZ": "https://grandclean.uz/ru/",
         "uz-UZ": "https://grandclean.uz/uz/",
@@ -27,6 +28,11 @@ export async function generateMetadata({
   };
 }
 
-export default function HomePage({ params }: { params: { lang: Locale } }) {
-  return <HomePageClient lang={params.lang} />;
+export default async function HomePage({
+  params,
+}: {
+  params: Promise<{ lang: Locale }>;
+}) {
+  const { lang } = await params;
+  return <HomePageClient lang={lang} />;
 }

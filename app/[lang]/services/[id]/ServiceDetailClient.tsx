@@ -145,11 +145,15 @@ export default function ServiceDetailClient({
         </div>
 
         {/* FAQ */}
-        {service.faq[lang] && service.faq[lang].length > 0 && (
-          <div className="container-wide mt-12 md:mt-16">
-            <ServiceFAQ faq={service.faq[lang]} serviceTitle={tr.title} />
-          </div>
-        )}
+        {service.faq[lang as keyof typeof service.faq] &&
+          service.faq[lang as keyof typeof service.faq].length > 0 && (
+            <div className="container-wide mt-12 md:mt-16">
+              <ServiceFAQ
+                faq={service.faq[lang as keyof typeof service.faq]}
+                serviceTitle={tr.title}
+              />
+            </div>
+          )}
 
         {/* Carpet Washing Steps */}
         {service.id === "stirka-kovrov" && (
