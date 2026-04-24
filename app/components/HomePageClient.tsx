@@ -265,7 +265,7 @@ export default function HomePageClient({ lang }: { lang: Locale }) {
                   alt={servicesData[activeService].translations[lang]?.title}
                   fill
                   priority={true}
-                  sizes="(min-width: 1024px) 60vw, 100vw"
+                  sizes="(min-width: 1340px) 804px, (min-width: 1024px) 60vw, 100vw"
                   className="w-full h-full object-cover object-top"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent hidden" />
@@ -304,7 +304,7 @@ export default function HomePageClient({ lang }: { lang: Locale }) {
                       alt={tr.title}
                       fill
                       priority={i === 0}
-                      sizes="100vw"
+                      sizes="(min-width: 640px) 600px, 100vw"
                       className="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
