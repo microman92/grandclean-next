@@ -1,7 +1,7 @@
 "use client";
 
 import { Check } from "lucide-react";
-import { motion } from "framer-motion";
+import AnimatedSection from "./AnimatedSection";
 import SectionHeading from "./SectionHeading";
 
 const tariffs = [
@@ -125,19 +125,7 @@ export default function PricingGrid() {
               </p>
             </div>
 
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: "-50px" }}
-              variants={{
-                visible: {
-                  transition: {
-                    staggerChildren: 0.2,
-                  },
-                },
-              }}
-              className="w-full relative"
-            >
+            <div className="w-full relative">
               {/* Connecting line (desktop only) */}
               <div className="hidden md:block absolute top-[28px] left-[10%] right-[10%] h-[2px] bg-white/10" />
 
@@ -149,23 +137,9 @@ export default function PricingGrid() {
                   { title: "Отжим" },
                   { title: "Сушка", subtitle: "с озонатором" },
                 ].map((step, idx) => (
-                  <motion.div
+                  <AnimatedSection
                     key={idx}
-                    variants={{
-                      hidden: {
-                        opacity: idx === 0 ? 1 : 0,
-                        x: idx === 0 ? 0 : -40,
-                      },
-                      visible: {
-                        opacity: 1,
-                        x: 0,
-                        transition: {
-                          type: "spring",
-                          stiffness: 70,
-                          damping: 15,
-                        },
-                      },
-                    }}
+                    delay={idx * 0.15}
                     className="flex flex-col items-center justify-start text-center p-5 bg-card/60 backdrop-blur-sm rounded-xl border border-white/5 h-full relative group hover:border-gold/30 hover:bg-white/5 transition-all duration-300 shadow-lg"
                   >
                     <div className="w-10 h-10 shrink-0 rounded-full bg-background border-2 border-gold/30 group-hover:border-gold text-gold flex items-center justify-center font-bold text-lg mb-4 shadow-[0_0_15px_rgba(255,184,0,0.1)] group-hover:shadow-[0_0_20px_rgba(255,184,0,0.4)] transition-all duration-300 relative z-10">
@@ -179,10 +153,10 @@ export default function PricingGrid() {
                         {step.subtitle}
                       </span>
                     )}
-                  </motion.div>
+                  </AnimatedSection>
                 ))}
               </div>
-            </motion.div>
+            </div>
           </div>
         </div>
       </div>

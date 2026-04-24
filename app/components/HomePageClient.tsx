@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { motion } from "framer-motion";
 import {
   ArrowRight,
   Shield,
@@ -101,42 +100,34 @@ export default function HomePageClient({ lang }: { lang: Locale }) {
         <div className="container-wide relative z-10 grid lg:grid-cols-2 gap-12 lg:gap-8 items-center py-16 md:py-20">
           {/* Left */}
           <div>
-            <motion.span
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 }}
-              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-gold/30 bg-gold/10 text-gold text-xs font-display font-semibold tracking-wider uppercase mb-8"
+            <span
+              style={{ animationDelay: "0.1s" }}
+              className="animate-fade-up inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-gold/30 bg-gold/10 text-gold text-xs font-display font-semibold tracking-wider uppercase mb-8"
             >
               <Sparkles className="w-3.5 h-3.5" />
               Премиум клининг в Ташкенте
-            </motion.span>
+            </span>
 
-            <motion.h1
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2, duration: 0.7 }}
-              className="font-display font-extrabold text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-primary-foreground leading-[1.1] mb-6"
+            <h1
+              style={{ animationDelay: "0.2s", animationDuration: "0.7s" }}
+              className="animate-fade-up font-display font-extrabold text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-primary-foreground leading-[1.1] mb-6"
             >
               Безупречная <span className="text-gradient-gold">чистота</span>{" "}
               вашего пространства
-            </motion.h1>
+            </h1>
 
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4 }}
-              className="text-primary-foreground/70 text-lg md:text-xl leading-relaxed max-w-lg mb-10"
+            <p
+              style={{ animationDelay: "0.4s" }}
+              className="animate-fade-up text-primary-foreground/70 text-lg md:text-xl leading-relaxed max-w-lg mb-10"
             >
               Профессиональная химчистка мебели, стирка ковров и уборка квартир
               в Ташкенте. Используем оборудование Karcher и безопасные
               эко-средства.
-            </motion.p>
+            </p>
 
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5 }}
-              className="flex flex-wrap gap-4"
+            <div
+              style={{ animationDelay: "0.5s" }}
+              className="animate-fade-up flex flex-wrap gap-4"
             >
               <Link
                 href={`/${lang}/contact/`}
@@ -151,14 +142,12 @@ export default function HomePageClient({ lang }: { lang: Locale }) {
               >
                 Узнать стоимость
               </Link>
-            </motion.div>
+            </div>
 
             {/* Stats */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.7 }}
-              className="mt-12 flex gap-8 md:gap-12"
+            <div
+              style={{ animationDelay: "0.7s" }}
+              className="animate-fade-in mt-12 flex gap-8 md:gap-12"
             >
               {[
                 { val: "1000+", label: "Довольных клиентов" },
@@ -174,16 +163,11 @@ export default function HomePageClient({ lang }: { lang: Locale }) {
                   </div>
                 </div>
               ))}
-            </motion.div>
+            </div>
           </div>
 
           {/* Right — hero image */}
-          <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.3, duration: 0.8 }}
-            className="relative hidden lg:block"
-          >
+          <div className="relative hidden lg:block">
             <div className="relative rounded-2xl overflow-hidden shadow-elevated w-full h-[520px]">
               <Image
                 src="/images/hero-interior.webp"
@@ -195,7 +179,7 @@ export default function HomePageClient({ lang }: { lang: Locale }) {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
             </div>
-          </motion.div>
+          </div>
         </div>
       </section>
 
@@ -253,18 +237,14 @@ export default function HomePageClient({ lang }: { lang: Locale }) {
                       )}
                     </div>
                     {activeService === i && (
-                      <motion.div
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: "auto" }}
-                        className="overflow-hidden"
-                      >
+                      <div className="overflow-hidden animate-fade-in">
                         <p className="text-muted-foreground text-sm mt-2 mb-3 leading-relaxed">
                           {tr.shortDesc}
                         </p>
                         <span className="inline-flex items-center gap-1 text-gold text-xs font-semibold uppercase tracking-wider hover:text-white transition-colors">
                           Узнать подробнее
                         </span>
-                      </motion.div>
+                      </div>
                     )}
                   </button>
                 );
@@ -276,17 +256,15 @@ export default function HomePageClient({ lang }: { lang: Locale }) {
               href={`/${lang}/services/${servicesData[activeService].id}/`}
               className="lg:col-span-3 relative block group/img"
             >
-              <motion.div
+              <div
                 key={activeService}
-                initial={{ opacity: 0, scale: 0.98 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.4 }}
-                className="rounded-2xl overflow-hidden h-[500px] lg:h-full lg:min-h-[400px]"
+                className="animate-scale-in rounded-2xl overflow-hidden h-[500px] lg:h-full lg:min-h-[400px]"
               >
                 <Image
                   src={servicesData[activeService].img}
                   alt={servicesData[activeService].translations[lang]?.title}
                   fill
+                  priority={true}
                   sizes="(min-width: 1024px) 60vw, 100vw"
                   className="w-full h-full object-cover object-top"
                 />
@@ -304,13 +282,13 @@ export default function HomePageClient({ lang }: { lang: Locale }) {
                     {servicesData[activeService].translations[lang]?.shortDesc}
                   </p>
                 </div>
-              </motion.div>
+              </div>
             </Link>
           </div>
 
           {/* Mobile/Tablet View (Cards) - Visible at 992px and below */}
           <div className="min-[993px]:hidden space-y-6">
-            {servicesData.map((s) => {
+            {servicesData.map((s, i) => {
               const tr = s.translations[lang] ?? s.translations.ru;
               return (
                 <div
@@ -325,6 +303,7 @@ export default function HomePageClient({ lang }: { lang: Locale }) {
                       src={s.img}
                       alt={tr.title}
                       fill
+                      priority={i === 0}
                       sizes="100vw"
                       className="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
                     />
@@ -385,29 +364,10 @@ export default function HomePageClient({ lang }: { lang: Locale }) {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {advantages.map((a, i) => (
-              <motion.div
+              <AnimatedSection
                 key={a.title}
-                initial="hidden"
-                whileInView="visible"
-                whileHover="hover"
-                viewport={{ once: true, margin: "-50px" }}
-                variants={{
-                  hidden: { opacity: 0, y: 30 },
-                  visible: {
-                    opacity: 1,
-                    y: 0,
-                    transition: {
-                      delay: i * 0.1,
-                      duration: 0.5,
-                      ease: "easeOut",
-                    },
-                  },
-                  hover: {
-                    scale: 1.02,
-                    transition: { duration: 0.2, ease: "easeOut" },
-                  },
-                }}
-                className="group relative p-8 rounded-2xl bg-card border border-white/5 overflow-hidden transition-colors transition-shadow duration-300 hover:border-gold/30 hover:shadow-[0_10px_30px_-10px_rgba(255,184,0,0.15)]"
+                delay={i * 0.1}
+                className="group relative p-8 rounded-2xl bg-card border border-white/5 overflow-hidden transition-all duration-300 hover:scale-[1.02] hover:border-gold/30 hover:shadow-[0_10px_30px_-10px_rgba(255,184,0,0.15)]"
               >
                 {/* Background glow on hover */}
                 <div className="absolute inset-0 bg-gradient-to-br from-gold/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -423,7 +383,7 @@ export default function HomePageClient({ lang }: { lang: Locale }) {
                     {a.desc}
                   </p>
                 </div>
-              </motion.div>
+              </AnimatedSection>
             ))}
           </div>
         </div>
@@ -443,41 +403,28 @@ export default function HomePageClient({ lang }: { lang: Locale }) {
             <div className="hidden lg:block absolute top-[28px] left-[5%] right-[5%] h-[2px] bg-gold/20 -z-10" />
 
             {steps.map((step, i) => (
-              <motion.div
+              <AnimatedSection
                 key={step.num}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, margin: "-50px" }}
-                variants={{
-                  hidden: { opacity: 0, x: 20 },
-                  visible: {
-                    opacity: 1,
-                    x: 0,
-                    transition: { delay: i * 0.15, duration: 0.5 },
-                  },
-                }}
+                delay={i * 0.15}
                 className="group flex flex-col items-center flex-1 text-center relative z-10 w-full max-w-[255px] mx-auto last:col-span-2 lg:last:col-span-1 lg:max-w-none"
               >
                 {/* Circle */}
-                <motion.div
-                  whileHover={{ scale: 1.15, backgroundColor: "#FFB800" }}
-                  className="w-14 h-14 md:w-16 md:h-16 rounded-full bg-card border-2 border-gold/40 flex items-center justify-center mb-6 transition-colors shadow-elevated cursor-pointer"
-                >
-                  <motion.span className="font-display font-extrabold text-xl text-gold group-hover:text-white transition-colors">
+                <div className="w-14 h-14 md:w-16 md:h-16 rounded-full bg-card border-2 border-gold/40 flex items-center justify-center mb-6 transition-all duration-300 hover:scale-110 hover:bg-[#FFB800] shadow-elevated cursor-pointer group/circle">
+                  <span className="font-display font-extrabold text-xl text-gold group-hover/circle:text-white transition-colors">
                     {step.num}
-                  </motion.span>
-                </motion.div>
+                  </span>
+                </div>
 
                 {/* Text box with hover lift */}
-                <motion.div whileHover={{ y: -5 }} className="transition-all">
+                <div className="transition-all duration-300 group-hover:-translate-y-1">
                   <h3 className="font-display font-bold text-sm md:text-base text-foreground mb-2 group-hover:text-gold transition-colors">
                     {step.title}
                   </h3>
                   <p className="text-muted-foreground text-xs md:text-sm max-w-[200px] mx-auto">
                     {step.desc}
                   </p>
-                </motion.div>
-              </motion.div>
+                </div>
+              </AnimatedSection>
             ))}
           </div>
         </div>

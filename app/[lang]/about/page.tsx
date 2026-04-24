@@ -5,7 +5,6 @@ import type { Locale } from "@/lib/i18n";
 import { getDictionary } from "@/lib/i18n";
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
 import { ArrowRight, Target, Heart, Leaf, Award } from "lucide-react";
 import AnimatedSection from "@/app/components/AnimatedSection";
 import SectionHeading from "@/app/components/SectionHeading";

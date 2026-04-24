@@ -7,7 +7,6 @@ import { servicesData, getServiceTranslation } from "@/data/services";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, Check } from "lucide-react";
-import { motion } from "framer-motion";
 import AnimatedSection from "@/app/components/AnimatedSection";
 
 const categories = ["Все", "Помещения", "Специальные", "Фасады и экстерьер"];

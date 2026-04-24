@@ -1,7 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
-
+import AnimatedSection from "./AnimatedSection";
 import SectionHeading from "./SectionHeading";
 
 const promoBirthday =
@@ -47,18 +46,14 @@ export default function Promotions() {
   [@media(min-width:390px)_and_(max-width:767px)]:mx-auto"
         >
           {promotions.map((promo, i) => (
-            <motion.div
+            <AnimatedSection
               key={promo.title}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ delay: i * 0.15, duration: 0.6, ease: "easeOut" }}
-              whileHover={{ y: -8 }}
-              className="group flex flex-col bg-[#1C1C1C] rounded-xl overflow-hidden border border-white/5 transition-colors transition-shadow duration-300 hover:border-gold/30 hover:shadow-[0_15px_40px_-10px_rgba(255,184,0,0.2)]"
+              delay={i * 0.15}
+              className="group flex flex-col bg-[#1C1C1C] rounded-xl overflow-hidden border border-white/5 transition-all duration-300 hover:border-gold/30 hover:-translate-y-2 hover:shadow-[0_15px_40px_-10px_rgba(255,184,0,0.2)]"
             >
               <div className="h-[260px] overflow-hidden relative md:max-w-full w-full mx-auto">
                 <div className="absolute inset-0 bg-gold/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 pointer-events-none" />
-                <motion.img
+                <img
                   src={promo.img}
                   alt={promo.title}
                   className="w-full h-full object-cover transition-transform duration-700 ease-out scale-[1.3] group-hover:scale-[1.38]"
@@ -70,8 +65,9 @@ export default function Promotions() {
                 </h3>
                 {promo.descHtml ? (
                   <p className="text-muted-foreground text-[15px] leading-relaxed">
-                    Мы отдаём <span className="text-gold font-semibold">10%</span>{" "}
-                    с каждого нашего заказа приюту для собак Mehr, чтобы вместе с
+                    Мы отдаём{" "}
+                    <span className="text-gold font-semibold">10%</span> с
+                    каждого нашего заказа приюту для собак Mehr, чтобы вместе с
                     вами делать добро.
                   </p>
                 ) : (
@@ -83,7 +79,7 @@ export default function Promotions() {
                   </p>
                 )}
               </div>
-            </motion.div>
+            </AnimatedSection>
           ))}
         </div>
       </div>

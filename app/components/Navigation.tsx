@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Menu, X, Phone } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+
 import type { Locale } from "@/lib/i18n";
 import type { Messages } from "@/lib/i18n";
 
@@ -142,65 +142,62 @@ export default function Navigation({ lang, t }: NavigationProps) {
       </div>
 
       {/* Mobile menu */}
-      <AnimatePresence>
-        {mobileOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden overflow-hidden bg-background border-t border-border"
-          >
-            <nav className="container-wide py-6 flex flex-col gap-4">
-              {navLinks.map((item) => {
-                const isActive = pathname === item.path;
-                return (
+      <div
+        className={`lg:hidden overflow-hidden bg-background border-t border-border transition-all duration-300 ease-in-out ${
+          mobileOpen
+            ? "max-h-[500px] opacity-100"
+            : "max-h-0 opacity-0 border-transparent"
+        }`}
+      >
+        <nav className="container-wide py-6 flex flex-col gap-4">
+          {navLinks.map((item) => {
+            const isActive = pathname === item.path;
+            return (
+              <Link
+                key={item.path}
+                href={item.path}
+                className={`text-base font-medium py-2 ${
+                  isActive ? "text-gold" : "text-muted-foreground"
+                }`}
+              >
+                {labels[item.key]}
+              </Link>
+            );
+          })}
+          <div className="pt-4 mt-2 border-t border-border flex flex-col gap-5">
+            <div className="flex items-center">
+              <div className="flex bg-white/5 p-1 rounded-lg">
+                {(["ru", "uz"] as Locale[]).map((l) => (
                   <Link
-                    key={item.path}
-                    href={item.path}
-                    className={`text-base font-medium py-2 ${
-                      isActive ? "text-gold" : "text-muted-foreground"
+                    key={l}
+                    href={l === lang ? pathname || "/" : altPath}
+                    className={`px-4 py-1.5 rounded-md text-xs font-bold tracking-wider transition-all duration-300 ${
+                      lang === l
+                        ? "bg-gold text-accent-foreground shadow-sm"
+                        : "text-muted-foreground hover:text-white"
                     }`}
                   >
-                    {labels[item.key]}
+                    {l.toUpperCase()}
                   </Link>
-                );
-              })}
-              <div className="pt-4 mt-2 border-t border-border flex flex-col gap-5">
-                <div className="flex items-center">
-                  <div className="flex bg-white/5 p-1 rounded-lg">
-                    {(["ru", "uz"] as Locale[]).map((l) => (
-                      <Link
-                        key={l}
-                        href={l === lang ? pathname || "/" : altPath}
-                        className={`px-4 py-1.5 rounded-md text-xs font-bold tracking-wider transition-all duration-300 ${
-                          lang === l
-                            ? "bg-gold text-accent-foreground shadow-sm"
-                            : "text-muted-foreground hover:text-white"
-                        }`}
-                      >
-                        {l.toUpperCase()}
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-                <a
-                  href="tel:+998935712151"
-                  className="flex items-center w-fit gap-2 text-sm font-medium text-white"
-                >
-                  <Phone className="w-4 h-4 text-gold" />
-                  +998 93 571 21 51
-                </a>
-                <Link
-                  href={`/${lang}/contact/`}
-                  className="w-fit px-6 py-2.5 rounded-lg font-display font-semibold text-sm text-accent-foreground bg-gold hover:bg-gold-light transition-colors"
-                >
-                  {t.nav.order}
-                </Link>
+                ))}
               </div>
-            </nav>
-          </motion.div>
-        )}
-      </AnimatePresence>
+            </div>
+            <a
+              href="tel:+998935712151"
+              className="flex items-center w-fit gap-2 text-sm font-medium text-white"
+            >
+              <Phone className="w-4 h-4 text-gold" />
+              +998 93 571 21 51
+            </a>
+            <Link
+              href={`/${lang}/contact/`}
+              className="w-fit px-6 py-2.5 rounded-lg font-display font-semibold text-sm text-accent-foreground bg-gold hover:bg-gold-light transition-colors"
+            >
+              {t.nav.order}
+            </Link>
+          </div>
+        </nav>
+      </div>
     </header>
   );
 }

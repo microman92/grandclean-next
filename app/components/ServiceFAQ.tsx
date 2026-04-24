@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
 
 interface FaqItem {
   question: string;
@@ -72,22 +71,19 @@ export default function ServiceFAQ({ faq, serviceTitle }: ServiceFAQProps) {
                 />
               </button>
 
-              <AnimatePresence initial={false}>
-                {openIndex === i && (
-                  <motion.div
-                    key="content"
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: "auto", opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.3, ease: "easeInOut" }}
-                    className="overflow-hidden"
-                  >
-                    <p className="px-6 pb-5 text-muted-foreground text-sm leading-relaxed border-t border-white/5 pt-4">
-                      {item.answer}
-                    </p>
-                  </motion.div>
-                )}
-              </AnimatePresence>
+              <div
+                className={`grid transition-all duration-300 ease-in-out ${
+                  openIndex === i
+                    ? "grid-rows-[1fr] opacity-100"
+                    : "grid-rows-[0fr] opacity-0"
+                }`}
+              >
+                <div className="overflow-hidden">
+                  <p className="px-6 pb-5 text-muted-foreground text-sm leading-relaxed border-t border-white/5 pt-4">
+                    {item.answer}
+                  </p>
+                </div>
+              </div>
             </div>
           ))}
         </div>
